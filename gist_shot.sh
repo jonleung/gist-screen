@@ -7,8 +7,6 @@ cd $MY_SCREENSHOTS_FOLDER_PATH
 title=$(date "+Screenshot %H:%M:%S%p on %a, %m-%d-%Y")
 filename="$title.png"
 
-rm -rf .git
-
 screencapture -i "$filename"
 
 osascript -e 'display notification "" with title "Uploading Screenshot..."'
