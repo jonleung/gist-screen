@@ -1,8 +1,9 @@
-folder="/Volumes/h/Dropbox (Personal)/screenshots/"
 title=$(date "+%Y-%m-%d@%H-%M-%S%p")
+MY_SCREENSHOTS_FOLDER_PATH="/Volumes/h/Dropbox (Personal)/screenshots/"
+
 filename="$title.png"
 
-cd "$folder"
+cd "$MY_SCREENSHOTS_FOLDER_PATH"
 rm -rf .git
 
 screencapture -i "$filename"
