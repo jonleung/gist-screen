@@ -10,20 +10,24 @@ title=$(date "+Screenshot %H:%M:%S%p on %a, %m-%d-%Y")
 filename="$title.png"
 screencapture -i "$filename"
 
-# Notification: In Progress
-osascript -e 'display notification "" with title "Uploading Screenshot..."'
+# If the exit code of screencapture is 0
+#   (meaning that the user didn't press escape)
+if [ $? -eq 0 ]; then
+  # Notification: In Progress
+  osascript -e 'display notification "" with title "Uploading Screenshot..."'
 
-# Upload gist
-gistup --private --no-open -- "$filename"
+  # Upload gist
+  gistup --private --no-open -- "$filename"
 
-# Calculate & copy URL
-repo_hash=$(git remote get-url origin | egrep -o '[0-9a-f]{5,40}')
-commit_hash=$(git rev-parse HEAD)
-url=https://gist.githubusercontent.com/jonleung/$repo_hash/raw/$commit_hash/$filename
-echo $url | pbcopy
+  # Calculate & copy URL
+  repo_hash=$(git remote get-url origin | egrep -o '[0-9a-f]{5,40}')
+  commit_hash=$(git rev-parse HEAD)
+  url=https://gist.githubusercontent.com/jonleung/$repo_hash/raw/$commit_hash/$filename
+  echo $url | pbcopy
 
-# Notification: Finished
-osascript -e 'display notification "The URL of your screenshot has been copied to your clipboard!" with title "Screenshot URL Copied to Clipboard!" sound name "Submarine"'
+  # Notification: Finished
+  osascript -e 'display notification "The URL of your screenshot has been copied to your clipboard!" with title "Screenshot URL Copied to Clipboard!" sound name "Submarine"'
 
-# Remove git repository
-rm -rf .git repository
+  # Remove git repository
+  rm -rf .git repository
+fi
