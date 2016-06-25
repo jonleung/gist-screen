@@ -1,6 +1,6 @@
-title=$(date "+%Y-%m-%d@%H-%M-%S%p")
 MY_SCREENSHOTS_FOLDER_PATH="/Volumes/h/Dropbox (Personal)/screenshots/"
 
+title=$(date "+Screenshot %H:%M:%S%p on %a, %m-%d-%Y")
 filename="$title.png"
 
 cd "$MY_SCREENSHOTS_FOLDER_PATH"
