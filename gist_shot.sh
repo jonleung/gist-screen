@@ -6,7 +6,7 @@ MY_SCREENSHOTS_FOLDER_PATH=$desktop_path/screenshots
 cd $MY_SCREENSHOTS_FOLDER_PATH
 
 # Screencapture the file
-title=$(date "+Screenshot %H:%M:%S%p on %a, %m-%d-%Y")
+title=$(date "+screenshot_%H-%M-%S%p%a_%m-%d-%Y")
 filename="$title.png"
 screencapture -i "$filename"
 
