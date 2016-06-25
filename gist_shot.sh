@@ -1,3 +1,6 @@
+# Add the NPM modules to the $PATH
+PATH="/usr/local/bin:$PATH"
+
 # Create and cd into ~/Desktop/screenshots
 desktop_path="/Users/$(whoami)/Desktop"
 cd $desktop_path
