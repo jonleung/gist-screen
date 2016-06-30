@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Add the NPM modules to the $PATH
 PATH="/usr/local/bin:$PATH"
 
