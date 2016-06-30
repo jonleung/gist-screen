@@ -22,15 +22,20 @@ if [ $? -eq 0 ]; then
   # Upload gist
   gistup --private --no-open -- "$filename"
 
-  # Calculate & copy URL
+  # Calculate the URL
   repo_hash=$(git remote get-url origin | egrep -o '[0-9a-f]{5,40}')
   commit_hash=$(git rev-parse HEAD)
-  url=https://gist.githubusercontent.com/jonleung/$repo_hash/raw/$commit_hash/$filename
-  echo $url | pbcopy
+  long_url=https://gist.githubusercontent.com/jonleung/$repo_hash/raw/$commit_hash/$filename
+
+  # Shorten to git.io URL
+  short_url=$(curl -i https://git.io -F "url=$long_url" | grep Location: | egrep -o 'https.*')
+
+  # Copy git.io URL
+  echo $short_url | pbcopy
 
   # Notification: Finished
   osascript -e 'display notification "The URL of your screenshot has been copied to your clipboard!" with title "Screenshot URL Copied to Clipboard!" sound name "Submarine"'
 
   # Remove git repository
-  rm -rf .git repository
+  rmtrash -rf .git repository
 fi
