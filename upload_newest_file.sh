@@ -1,14 +1,3 @@
-# cd into the directory this script is contained in
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$DIR"
-
-# Generate filename
-name=$(date "+screencapture_%H-%M-%S%p%a_%m-%d-%Y")
-filename=${name}.mov
-
-# End  screen recording
-osascript screen_recording_end.applescript $name
-
 # Add the NPM modules to the $PATH
 PATH="/usr/local/bin:$PATH"
 
@@ -18,6 +7,9 @@ cd $desktop_path
 mkdir screenshots > /dev/null 2>&1
 MY_SCREENSHOTS_FOLDER_PATH=$desktop_path/screenshots
 cd $MY_SCREENSHOTS_FOLDER_PATH
+
+# Get the most recently updated filed
+filename=$(ls -t | head -1)
 
 # Upload gist
 gistup --private --no-open -- "$filename"
